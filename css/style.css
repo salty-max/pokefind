@@ -1,0 +1,134 @@
+.terminal {
+  padding: 4px 10px;
+  box-sizing: border-box;
+  font-family: 'Roboto Mono', monospace;
+}
+
+.top-bar {
+  background-color: #090909;
+  border-radius: 10px 10px 0 0;
+  color: #D3D3D3;
+  height: 60px;
+  width: 800px;
+  box-sizing: border-box;
+  padding: 10px 5px;
+  position: relative;
+  margin: 0 auto;
+}
+
+.dots {
+  float: left;
+  width: 100px;
+  display: flex;
+  justify-content: space-around;
+  vertical-align: middle;
+}
+
+.dot {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+}
+
+.title {
+  position: absolute;
+  width: 200px;
+  text-align: center;
+  left: calc(50% - 100px);
+  top: 0;
+  vertical-align: middle;
+}
+
+.red-dot {
+  background-color: #e74c3c;
+}
+
+.yellow-dot {
+  background-color: #f1c40f;
+}
+
+.green-dot {
+  background-color: #2ecc71;
+}
+
+h1 {
+  font-size: 12pt;
+  font-weight: normal;
+}
+
+em {
+  color: #3498db;
+  font-style: normal;
+}
+
+.screen {
+  background-color: #090909;
+  border-radius: 0 0 10px 10px;
+  color: #d3d3d3;
+  height: 570px;
+  position: relative;
+  width: 800px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.content {
+  padding: 10px;
+  bottom: 0;
+  position: absolute;
+}
+
+.img-container {
+  height: 400px;
+  overflow: scroll;
+}
+
+.subtitle {
+  font-weight: bold;
+}
+
+.game-text {
+  height: 110px;
+  overflow: hidden;
+}
+
+.warning {
+  color: #e74c3c;
+}
+
+.command {
+  list-style: none;
+  color: #2ecc71;
+}
+
+.item {
+  list-style: none;
+  color: #f1c40f;
+}
+
+.text-alert {
+  color: #e74c3c;
+}
+
+.text-help {
+  color: #f1c40f;
+}
+
+.command-line {
+  margin-top: 20px;
+}
+
+#user-input {
+  background-color: #090909;
+  border-radius: 0 0 10px 10px;
+  border: 0;
+  color: #d3d3d3;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 12pt;
+  width: 600px;
+}
+
+#user-input:focus {
+  outline: 0;
+}
