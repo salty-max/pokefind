@@ -83,16 +83,17 @@ em {
   width: 700px;
   height: 400px;
   overflow: hidden;
-  margin-left: 38px;
+  margin-left: 65px;
 }
 
 .imgs {
-  display: flex;
-  justify-content: space-around;
-  flex-flow: row wrap;
   width: 718px;
   height: 400px;
   overflow: auto;
+}
+
+.imgs img {
+  display: inline-block;
 }
 
 .subtitle {
