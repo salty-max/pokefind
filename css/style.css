@@ -80,8 +80,19 @@ em {
 }
 
 .img-container {
+  width: 700px;
   height: 400px;
-  overflow: scroll;
+  overflow: hidden;
+  margin-left: 38px;
+}
+
+.imgs {
+  display: flex;
+  justify-content: space-around;
+  flex-flow: row wrap;
+  width: 718px;
+  height: 400px;
+  overflow: auto;
 }
 
 .subtitle {
