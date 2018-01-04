@@ -5,7 +5,7 @@
 }
 
 .top-bar {
-  background-color: #090909;
+  background-color: #222;
   border-radius: 10px 10px 0 0;
   color: #D3D3D3;
   height: 60px;
@@ -63,7 +63,7 @@ em {
 }
 
 .screen {
-  background-color: #090909;
+  background-color: #222;
   border-radius: 0 0 10px 10px;
   color: #d3d3d3;
   height: 570px;
@@ -80,10 +80,11 @@ em {
 }
 
 .img-container {
+  display: block;
   width: 700px;
   height: 400px;
   overflow: hidden;
-  margin-left: 65px;
+  margin-left: 40px;
 }
 
 .imgs {
@@ -94,26 +95,34 @@ em {
 
 .imgs img {
   display: inline-block;
+  animation: fadein 1s;
 }
 
 .subtitle {
   font-weight: bold;
 }
 
-.lives {
+.game-data {
   position: absolute;
-  bottom: 0;
-  right: 0;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  width: 100px;
+  bottom: 20px;
+  right: 10px;
+  font-weight: bold;
+  width: 250px;
 }
 
-.lives li {
+.timer {
   display: inline-block;
-  list-style: none;
-  color: #e74c3c;
+  width: 120px;
+}
+
+.lives {
+  color: #2ecc71;
+  display: inline-block;
+}
+
+.text-info {
+  color: #3498db;
+  font-weight: bold;
 }
 
 .game-text {
@@ -121,26 +130,14 @@ em {
   overflow: hidden;
 }
 
-.warning {
-  color: #e74c3c;
-}
-
-.command {
-  list-style: none;
-  color: #2ecc71;
-}
-
-.item {
-  list-style: none;
-  color: #f1c40f;
-}
-
 .text-alert {
   color: #e74c3c;
+  font-weight: bold;
 }
 
 .text-help {
   color: #f1c40f;
+  font-weight: bold;
 }
 
 .command-line {
@@ -148,15 +145,21 @@ em {
 }
 
 #user-input {
-  background-color: #090909;
+  background-color: #222;
   border-radius: 0 0 10px 10px;
   border: 0;
   color: #d3d3d3;
   font-family: 'Roboto Mono', monospace;
   font-size: 12pt;
   width: 600px;
+  padding-bottom: 10px;
 }
 
 #user-input:focus {
   outline: 0;
+}
+
+@keyframes fadein {
+  from {opacity:0;}
+  to {opacity:1;}
 }

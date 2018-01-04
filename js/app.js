@@ -3,6 +3,12 @@ var app = {
   pokeFound: ['marill'],
   count: 0,
   thumbs: $('.imgs'),
+  lives: 3,
+  livesCount: $('.lives'),
+  lost: false,
+  timeLimit: 180,
+  currentSound: new Audio(),
+  $clock: $('.timer'),
 
   init: function() {
 
@@ -16,83 +22,19 @@ var app = {
 
   },
 
-  playSound: function(sound) {
-
-    var soundToPlay = new Audio('sounds/'+ sound +'.wav');
-    soundToPlay.volume = 0.2;
-    soundToPlay.play();
-
-  },
-
-  // gameOver: function() {
-  //
-  //   setTimeout(function() {location.reload()}, 5000);
-  //   app.playSound('gameover');
-  //   warning.html('<p>Game Over!</p>');
-  //
-  // },
-
-  showLives: function() {
-
-    var lives = 3;
-    var livesCount = $('.lives');
-    switch(lives){
-    case 3:
-      livesCount.empty();
-      livesCount.append('<ul>');
-      for(var i = 0; i < lives; i++) {
-        livesCount.append('<li>&hearts;</li>');
-      }
-      livesCount.append('</ul>');
-      break;
-
-    case 2:
-      livesCount.empty();
-      livesCount.append('<ul>');
-      for(var j = 0; j < lives; j++) {
-        livesCount.append('<li>&hearts;</li>');
-      }
-      livesCount.append('</ul>');
-      break;
-
-    case 1:
-      livesCount.empty();
-      livesCount.append('<ul>');
-      for(var k = 0; k < lives; k++) {
-        livesCount.append('<li>&hearts;</li>');
-      }
-      livesCount.append('</ul>');
-      break;
-
-    default:
-      livesCount.empty();
-      break;
-    }
-
-  },
-
   checkPokemon: function(input) {
 
     for(var j = 0; j < app.pokeFound.length; j++){
 
-      if(app.pokeFound.includes(input)) {
-
+      if(input === app.pokeFound[j]) {
         console.log('already found');
         app.warning('<p>Déjà trouvé!</p>');
         app.playSound('lose');
-        //app.lives--;
-        // showLives();
-        // if(lives === 0) {
-        //   gameOver()
-        // }
+        app.loseLife();
       }
-
       else {
-
         for(var i = 0; i < pokemons.length; i++) {
-
-          if(input === pokemons[i] && !app.pokeFound.includes(input)) {
-
+          if(input === pokemons[i] && !app.pokeFound.includes(pokemons[i])) {
             app.warning('');
             app.addToArray(app.pokeFound, pokemons[i]);
             console.log(input);
@@ -102,29 +44,87 @@ var app = {
             app.playSound(pokemons[i]);
             app.count++;
             app.output(app.count, pokemons.length);
-
           }
         }
       }
     }
   },
 
-  warning: function(text) {
-    $('.warning').html(text);
+  playSound: function(sound) {
+
+    var soundToPlay = new Audio('sounds/'+ sound +'.wav');
+    soundToPlay.volume = 0.2;
+    soundToPlay.play();
+    app.currentSound = soundToPlay;
+  },
+
+  stopSound: function(sound) {
+    sound.pause();
+  },
+
+  gameOver: function() {
+
+    setTimeout(function() {location.reload();}, 5000);
+    app.playSound('gameover');
+    app.livesCount.css('display', 'none');
+    app.$clock.css('display', 'none');
+    app.warning('<p>Game Over!</p>');
+
+  },
+
+  loseLife: function() {
+    app.lost = true;
+    app.lives--;
+    app.livesManager();
+    console.log(app.lives);
+
+    if(app.lives === 0) {
+      app.gameOver();
+    }
+    return app.lost;
+  },
+
+  livesManager: function() {
+    app.livesCount.html('Lives: ' + app.lives);
+  },
+
+  timer: function() {
+    var countdown = 0;
+    var timer = setInterval(function() {
+      app.$clock.text('Time: ' + Math.floor((app.timeLimit - countdown) / 60) + 'm ' + ((app.timeLimit - countdown) % 60 ) +'s');
+      countdown++;
+
+      if (countdown > (app.timeLimit - 10)) {
+        app.$clock.css('color', '#e74c3c');
+        app.playSound('timer');
+      }
+
+      if (app.timeLimit < countdown) {
+        app.stopSound(app.currentSound);
+        app.gameOver();
+        window.clearInterval(timer);
+      }
+    }, 1000);
+  },
+
+  warning: function(content) {
+    $('#warning').html(content);
   },
 
   output: function(count, length) {
-    $('.count').html('<p class="text-help">Pokemon trouvés : <em>'+ count +'</em> sur '+ length +'</p>');
+    $('.count').html('<p class="text-info">Pokemon trouvés : <span class="text-help">'+ count +'</span> sur '+ length +'</p>');
 
   },
 
   addToArray: function(arr, element) {
     arr.push(element);
   }
+
 };
 
 $(function() {
 
   $(app.init);
-  // $(app.showLives);
+  $(app.livesManager);
+  $(app.timer);
 });
